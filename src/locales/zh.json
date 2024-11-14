@@ -3,10 +3,10 @@
     "title": "你好 世界!"
   },
   "HeroLanding": {
-    "introducing": "模板介绍",
-    "kickoff": "您的第一个出海 SaaS 模板：",
-    "saasStarter": "FFlow Next",
-    "description": "使用 Next.js 14、Next Intl、Drizzle ORM、Neon、Auth.js v5、Resend、React Email、Shadcn/ui、Stripe 构建您的下一个 SaaS 出海项目。",
+    "introducing": "超过 60+ 工具，20+ 类别",
+    "kickoff": "你的专业",
+    "saasStarter": "跨境业务工具导航",
+    "description": "介绍和跨境业务相关的工具集合",
     "goPricing": "查看定价",
     "starOn": "Star on",
     "github": "GitHub",
@@ -585,5 +585,20 @@
     "orContinueWith": "或者使用下面登录方式",
     "signUpWithEmail": "使用邮箱注册",
     "signInWithEmail": "使用邮箱登录"
+  },
+  "Navigation": {
+    "title": "网站导航",
+    "description": "发现并探索精选的优质网站资源",
+    "Menu": {
+      "categories": {
+        "tools": "工具类",
+        "resources": "资源类",
+        "learning": "学习类",
+        "ai": "AI 相关"
+      }
+    },
+    "Cards": {
+      "viewMore": "查看更多"
+    }
   }
 }

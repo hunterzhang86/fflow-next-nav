@@ -1,13 +1,9 @@
 import { useTranslations } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 
-import BentoGrid from "@/components/sections/bentogrid";
-import Features from "@/components/sections/features";
 import HeroLanding from "@/components/sections/hero-landing";
-import InfoLanding from "@/components/sections/info-landing";
-import Powered from "@/components/sections/powered";
-import PreviewLanding from "@/components/sections/preview-landing";
-import Testimonials from "@/components/sections/testimonials";
+import NavigationSection from "@/components/sections/navigation-section";
+import NavHeroLanding from "@/components/sections/nav-hero-landing";
 
 export default function HomePage({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
@@ -15,13 +11,8 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
 
   return (
     <main>
-      <HeroLanding locale={locale} />
-      <PreviewLanding />
-      <Powered locale={locale} />
-      <BentoGrid locale={locale} />
-      <InfoLanding locale={locale} />
-      <Features />
-      <Testimonials locale={locale} />
+      <NavHeroLanding locale={locale} />
+      <NavigationSection locale={locale} />
     </main>
   );
 }

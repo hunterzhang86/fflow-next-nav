@@ -3,10 +3,10 @@
     "title": "Hello world!"
   },
   "HeroLanding": {
-    "introducing": "Introducing Template",
-    "kickoff": "Your First Overseas SaaS Template: ",
-    "saasStarter": "FFlow Next",
-    "description": "Build your Next Overseas SaaS project using Next.js 14, Next Intl, Drizzle ORM, Neon, Auth.js v5, Resend, React Email, Shadcn/ui, Stripe.",
+    "introducing": "✨ Listing  60+ directories of 20+ categories",
+    "kickoff": "Your Ultimate",
+    "saasStarter": "Cross-border Business Tools Directory",
+    "description": "Discover the best directories of cross-border business tools",
     "goPricing": "Go Pricing",
     "starOn": "Star on",
     "github": "GitHub",
@@ -583,5 +583,21 @@
     "orContinueWith": "Or continue with",
     "signUpWithEmail": "Sign Up with Email",
     "signInWithEmail": "Sign In with Email"
+  },
+  "Navigation": {
+    "title": "Website Navigation",
+    "description": "Discover and explore curated优质网站资源",
+    "viewMore": "View More",
+    "Menu": {
+      "categories": {
+        "tools": "Tools",
+        "resources": "Resources",
+        "learning": "Learning",
+        "ai": "AI"
+      }
+    },
+    "Cards": {
+      "viewMore": "View More"
+    }
   }
 }
