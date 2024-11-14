@@ -21,9 +21,11 @@ import {
   Image
 } from "lucide-react";
 
-interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
+  onSubCategorySelect?: (categoryId: string, subCategoryId: string) => void;
+}
 
-export default function Menu({ className, ...props }: MenuProps) {
+export default function Menu({ className, onSubCategorySelect, ...props }: MenuProps) {
   const t = useTranslations("Navigation.Menu");
 
   const categories = [
@@ -87,6 +89,7 @@ export default function Menu({ className, ...props }: MenuProps) {
                   <button 
                     key={sub.id}
                     className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-left hover:bg-accent hover:text-accent-foreground"
+                    onClick={() => onSubCategorySelect?.(category.id, sub.id)}
                   >
                     {sub.icon}
                     <span>{sub.label}</span>

@@ -5,13 +5,17 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
-interface CardsProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface CardsProps extends React.HTMLAttributes<HTMLDivElement> {
+  categoryId?: string;
+  subCategoryId?: string;
+}
 
 interface Website {
   id: number;
   title: string;
   icon: string;
   categories: string[];
+  subCategories: { categoryId: string; subCategoryId: string }[];
   description: string;
   featured?: boolean;
   discount?: string;
@@ -24,7 +28,7 @@ interface Website {
   };
 }
 
-export default function Cards({ className, ...props }: CardsProps) {
+export default function Cards({ className, categoryId, subCategoryId, ...props }: CardsProps) {
   const t = useTranslations("Navigation.Cards");
 
   const websites: Website[] = [
@@ -33,6 +37,7 @@ export default function Cards({ className, ...props }: CardsProps) {
       title: "AI Best Tools",
       icon: "/placeholder.svg",
       categories: ["AI", "Productivity"],
+      subCategories: [{ categoryId: "ai", subCategoryId: "ai-tools" }],
       description: "AIBest.Tools is a curated list of the best AI tools that are currently trending and profitable.",
       featured: true,
       hot: true,
@@ -49,6 +54,7 @@ export default function Cards({ className, ...props }: CardsProps) {
       title: "开发工具集",
       icon: "/placeholder.svg",
       categories: ["开发", "工具"],
+      subCategories: [{ categoryId: "tools", subCategoryId: "dev" }],
       description: "为开发者提供的全套开发工具集合，包括代码编辑器、调试工具等。",
       featured: false,
       tags: ["开发者工具"],
@@ -63,6 +69,7 @@ export default function Cards({ className, ...props }: CardsProps) {
       title: "设计资源库",
       icon: "/placeholder.svg",
       categories: ["设计", "资源"],
+      subCategories: [{ categoryId: "design", subCategoryId: "resources" }],
       description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
       featured: true,
       discount: "20% off",
@@ -78,6 +85,7 @@ export default function Cards({ className, ...props }: CardsProps) {
         title: "设计资源库",
         icon: "/placeholder.svg",
         categories: ["设计", "资源"],
+        subCategories: [{ categoryId: "design", subCategoryId: "resources" }],
         description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
         featured: true,
         discount: "20% off",
@@ -93,6 +101,7 @@ export default function Cards({ className, ...props }: CardsProps) {
         title: "AI Best Tools",
         icon: "/placeholder.svg",
         categories: ["AI", "Productivity"],
+        subCategories: [{ categoryId: "ai", subCategoryId: "ai-tools" }],
         description: "AIBest.Tools is a curated list of the best AI tools that are currently trending and profitable.",
         featured: true,
         discount: "30% off",
@@ -108,6 +117,7 @@ export default function Cards({ className, ...props }: CardsProps) {
         title: "开发工具集",
         icon: "/placeholder.svg",
         categories: ["开发", "工具"],
+        subCategories: [{ categoryId: "tools", subCategoryId: "dev" }],
         description: "为开发者提供的全套开发工具集合，包括代码编辑器、调试工具等。",
         featured: false,
         tags: ["开发者工具"],
@@ -122,6 +132,7 @@ export default function Cards({ className, ...props }: CardsProps) {
         title: "设计资源库",
         icon: "/placeholder.svg",
         categories: ["设计", "资源"],
+        subCategories: [{ categoryId: "design", subCategoryId: "resources" }],
         description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
         featured: true,
         discount: "20% off",
@@ -137,6 +148,7 @@ export default function Cards({ className, ...props }: CardsProps) {
           title: "设计资源库",
           icon: "/placeholder.svg",
           categories: ["设计", "资源"],
+          subCategories: [{ categoryId: "design", subCategoryId: "resources" }],
           description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
           featured: true,
           discount: "20% off",
@@ -149,8 +161,17 @@ export default function Cards({ className, ...props }: CardsProps) {
         }
   ];
 
-  // 对网站列表进行排序，hot 的排在前面
-  const sortedWebsites = [...websites].sort((a, b) => {
+  // 根据分类筛选网站
+  const filteredWebsites = categoryId && subCategoryId
+    ? websites.filter(site => 
+        site.subCategories.some(
+          cat => cat.categoryId === categoryId && cat.subCategoryId === subCategoryId
+        )
+      )
+    : websites;
+
+  // 对筛选后的网站列表进行排序，hot 的排在前面
+  const sortedWebsites = [...filteredWebsites].sort((a, b) => {
     if (a.hot && !b.hot) return -1;
     if (!a.hot && b.hot) return 1;
     return 0;

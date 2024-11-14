@@ -12,7 +12,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
   return (
     <main>
       <NavHeroLanding locale={locale} />
-      <NavigationSection locale={locale} />
+      <NavigationSection />
     </main>
   );
 }
