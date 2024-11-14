@@ -22,15 +22,15 @@ export default function NavigationSection() {
       <MaxWidthWrapper>
         <div className="mt-0">
           <NavigationLayout>
-      <Menu 
-        className="w-full md:w-64 shrink-0" 
-        onSubCategorySelect={handleSubCategorySelect}
-      />
-      <Cards 
-        className="flex-1" 
-        categoryId={selectedCategory?.categoryId}
-        subCategoryId={selectedCategory?.subCategoryId}
-      />
+            <Menu 
+              className="w-full" 
+              onSubCategorySelect={handleSubCategorySelect}
+            />
+            <Cards 
+              className="w-full" 
+              categoryId={selectedCategory?.categoryId}
+              subCategoryId={selectedCategory?.subCategoryId}
+            />
           </NavigationLayout>
         </div>
       </MaxWidthWrapper>

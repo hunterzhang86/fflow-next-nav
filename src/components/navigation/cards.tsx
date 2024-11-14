@@ -97,7 +97,7 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
         }
       },
       {
-        id: 1,
+        id: 5,
         title: "AI Best Tools",
         icon: "/placeholder.svg",
         categories: ["AI", "Productivity"],
@@ -113,10 +113,10 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
         }
       },
       {
-        id: 2,
+        id: 6,
         title: "开发工具集",
         icon: "/placeholder.svg",
-        categories: ["开发", "工具"],
+        categories: ["AI", "Productivity"],
         subCategories: [{ categoryId: "tools", subCategoryId: "dev" }],
         description: "为开发者提供的全套开发工具集合，包括代码编辑器、调试工具等。",
         featured: false,
@@ -128,11 +128,11 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
         }
       },
       {
-        id: 3,
+        id: 7,
         title: "设计资源库",
         icon: "/placeholder.svg",
-        categories: ["设计", "资源"],
-        subCategories: [{ categoryId: "design", subCategoryId: "resources" }],
+        categories: ["AI", "Productivity"],
+        subCategories: [{ categoryId: "learning", subCategoryId: "tutorials" }],
         description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
         featured: true,
         discount: "20% off",
@@ -144,11 +144,11 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
         }
       },
       {
-          id: 4,
+          id: 8,
           title: "设计资源库",
           icon: "/placeholder.svg",
-          categories: ["设计", "资源"],
-          subCategories: [{ categoryId: "design", subCategoryId: "resources" }],
+          categories: ["AI", "Productivity"],
+          subCategories: [{ categoryId: "ai", subCategoryId: "chatbots" }],
           description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
           featured: true,
           discount: "20% off",
@@ -159,6 +159,55 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
             as: 2
           }
         }
+        ,
+        {
+            id:9,
+            title: "设计资源库",
+            icon: "/placeholder.svg",
+            categories: ["AI", "Productivity"],
+            subCategories: [{ categoryId: "ai", subCategoryId: "chatbots" }],
+            description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
+            featured: true,
+            discount: "20% off",
+            tags: ["设计资源"],
+            metrics: {
+              monthlyVisits: "3k",
+              dr: 9,
+              as: 2
+            }
+          },
+          {
+            id: 10,
+            title: "设计资源库",
+            icon: "/placeholder.svg",
+            categories: ["AI", "Productivity"],
+            subCategories: [{ categoryId: "ai", subCategoryId: "chatbots" }],
+            description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
+            featured: true,
+            discount: "20% off",
+            tags: ["设计资源"],
+            metrics: {
+              monthlyVisits: "3k",
+              dr: 9,
+              as: 2
+            }
+          },
+          {
+            id: 11,
+            title: "设计资源库",
+            icon: "/placeholder.svg",
+            categories: ["AI", "Productivity"],
+            subCategories: [{ categoryId: "ai", subCategoryId: "chatbots" }],
+            description: "海量设计资源，包括UI组件、图标、插画等设计素。",
+            featured: true,
+            discount: "20% off",
+            tags: ["设计资源"],
+            metrics: {
+              monthlyVisits: "3k",
+              dr: 9,
+              as: 2
+            }
+          }
   ];
 
   // 根据分类筛选网站
@@ -179,28 +228,28 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
 
   return (
     <div className={cn(
-      "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-6 lg:gap-x-8",
+      "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[200px] gap-6",
       className
     )} {...props}>
       {sortedWebsites.map((site) => (
         <Card 
           key={site.id} 
           className={cn(
-            "flex flex-col justify-between gap-2 relative p-4 shadow-sm hover:shadow-md transition-shadow duration-300 h-[160px] sm:h-[180px]",
+            "flex flex-col justify-between relative p-4 shadow-sm hover:shadow-md transition-shadow duration-300 h-[200px]",
             site.hot 
               ? "border-orange-300 dark:border-orange-400/50 bg-orange-50/50 dark:bg-orange-950/10"
               : "border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950"
           )}
         >
-          <div className="flex flex-col gap-2 group">
-            <div className="flex flex-row items-center justify-between gap-2 min-h-[3.5rem]">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-row items-center justify-between gap-2">
               <div className="shrink-0">
                 <Image
                   src={site.icon}
                   alt={site.title}
                   width={44}
                   height={44}
-                  className="rounded-full w-9 h-9 sm:w-11 sm:h-11"
+                  className="rounded-full w-11 h-11"
                 />
               </div>
               <div className="flex flex-col flex-1 gap-1 min-w-0">
@@ -236,14 +285,14 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
               </div>
             </div>
 
-            <Link href="#">
-              <p className="text-xs sm:text-sm line-clamp-2 leading-relaxed hover:cursor-pointer hover:font-bold transition-all duration-200">
+            <Link href="#" className="group">
+              <p className="text-sm line-clamp-2 leading-relaxed hover:cursor-pointer hover:font-bold transition-all duration-200">
                 {site.description}
               </p>
             </Link>
           </div>
 
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center mt-4">
             <div className="flex-1">
               <div className="flex flex-wrap gap-1 sm:gap-2 items-center">
                 {site.tags.map((tag, index) => (

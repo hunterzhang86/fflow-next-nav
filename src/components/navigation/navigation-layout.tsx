@@ -10,7 +10,7 @@ export default function NavigationLayout({
   return (
     <div
       className={cn(
-        "flex flex-col gap-4 md:flex-row md:gap-6",
+        "grid md:grid-cols-[250px_1fr] gap-6",
         className
       )}
       {...props}
