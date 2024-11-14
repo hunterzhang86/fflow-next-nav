@@ -300,7 +300,7 @@
     "secureByDefaultDescription": "提供可靠的保护和真实的价值。大量的努力带来了巨大的回报和智慧的洞察。",
     "fasterThanLight": "比光速更快",
     "fasterThanLightDescription": "提供真实的速度体验。大量的努力带来了巨大的回报和创新的发明。",
-    "fasterThanLightAltDescription": "提供真实的速度体验。智慧的发明带来了巨大的价值。",
+    "fasterThanLightAltDescription": "提供真实的速度体验。智慧的发明���来了巨大的价值。",
     "keepLovedOnesSafe": "保护您所爱的人",
     "keepLovedOnesSafeDescription": "价值。大量的努力带来了巨大的回报和智慧的洞察。"
   },
@@ -317,7 +317,7 @@
     },
     "feature2": {
       "title": "功能 2",
-      "description": "满足当前需求，节省时间并供价值。明智而睿智的选择。",
+      "description": "满足当前需求，节省时间并供价值。���智而睿智的选择。",
       "link": "/",
       "icon": "google"
     },
@@ -371,7 +371,7 @@
       "list": {
         "Flexible": {
           "title": "灵活",
-          "description": "根据您的独特需求定制集成。"
+          "description": "根据您的独特需求��制集成。"
         },
         "Efficient": {
           "title": "高效",
@@ -598,7 +598,8 @@
       }
     },
     "Cards": {
-      "viewMore": "查看更多"
+      "viewMore": "查看更多",
+      "hot": "热门"
     }
   }
 }

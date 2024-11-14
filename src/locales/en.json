@@ -597,7 +597,8 @@
       }
     },
     "Cards": {
-      "viewMore": "View More"
+      "viewMore": "View More",
+      "hot": "Hot"
     }
   }
 }
