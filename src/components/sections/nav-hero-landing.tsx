@@ -15,7 +15,7 @@ export default async function NavHeroLanding({ locale }: NavHeroLandingProps) {
   const t = useTranslations("HeroLanding");
 
   return (
-    <section className="space-y-6 py-12 sm:py-20 lg:py-20">
+    <section className="space-y-6 py-12 sm:py-20 lg:py-10">
       <div className="container flex max-w-5xl flex-col items-center gap-5 text-center">
         <Link
           locale={false}

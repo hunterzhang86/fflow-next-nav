@@ -8,7 +8,7 @@ export default function NavigationSection({ locale }: { locale: string }) {
   const t = useTranslations("Navigation");
 
   return (
-    <section className="py-0">
+    <section className="py-4">
       <MaxWidthWrapper>
         <div className="mt-0">
           <NavigationLayout>
