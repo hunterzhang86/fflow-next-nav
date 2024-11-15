@@ -59,22 +59,10 @@ export default async function DocPage({ params }: DocPageProps) {
     }))
   );
 
-  const breadcrumbSegments = [
-    { title: "Items", href: "/items" },
-    ...(params.slug?.map((segment, index) => ({
-      title: segment,
-      href: `/items/${params.slug.slice(0, index + 1).join("/")}`,
-      hasDropdown: index === params.slug.length - 1
-    })) || []),
-    { title: doc.title, href: "#", active: true }
-  ];
-
   return (
     <MaxWidthWrapper>
       <div className="container max-w-7xl mt-8">
         <div className="flex flex-col gap-8">
-          <Breadcrumb segments={breadcrumbSegments} />
-
           {/* 改进的标题和描述区域 */}
           <div className="mb-8">
             <div className="flex items-center gap-4 mb-4">
