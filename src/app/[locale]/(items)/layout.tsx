@@ -5,7 +5,7 @@ import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 import { getDocsConfig } from "@/config/docs";
 import { getMarketingConfig } from "@/config/marketing";
 import { useTranslations } from "next-intl";
-import {unstable_setRequestLocale} from 'next-intl/server';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 interface DocsLayoutProps {
   children: React.ReactNode;
@@ -27,12 +27,16 @@ export default function DocsLayout({ children, params: {locale} }: DocsLayoutPro
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <NavMobile marketingConfig={marketingConfig} docsConfig={docsConfig} translations={translations} />
       <NavBar marketingConfig={marketingConfig} docsConfig={docsConfig} translations={translations} />
-      <MaxWidthWrapper className="min-h-screen" large>
-        {children}
-      </MaxWidthWrapper>
+      <div className="flex-1">
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="py-6">
+            {children}
+          </div>
+        </div>
+      </div>
       <SiteFooter className="border-t" />
     </div>
   );
