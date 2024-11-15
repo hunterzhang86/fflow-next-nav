@@ -58,6 +58,11 @@ export type DocsConfig = {
     sidebarNav: SidebarNavItem[];
 };
 
+export type ItemsConfig = {
+    mainNav: MainNavItem[];
+    sidebarNav: SidebarNavItem[];
+};
+
 export type SubscriptionPlan = {
     title: string;
     description: string;

@@ -1,7 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { allItems } from "contentlayer/generated";
 import { BarChart3, ExternalLink, Hash } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,208 +15,56 @@ interface Website {
   id: number;
   title: string;
   icon: string;
+  website: string;
   categories: string[];
-  subCategories: { categoryId: string; subCategoryId: string }[];
+  subCategories: string[];
   description: string;
   featured?: boolean;
   discount?: string;
   hot?: boolean;
   tags: string[];
   metrics: {
-    monthlyVisits: string;
+    monthlyVisits: number;
     dr: number;
     as: number;
   };
+  slug: string;
 }
 
 export default function Cards({ className, categoryId, subCategoryId, ...props }: CardsProps) {
   const t = useTranslations("Navigation.Cards");
 
-  const websites: Website[] = [
-    {
-      id: 1,
-      title: "AI Best Tools",
-      icon: "/placeholder.svg",
-      categories: ["AI", "Productivity"],
-      subCategories: [{ categoryId: "ai", subCategoryId: "ai-tools" }],
-      description: "AIBest.Tools is a curated list of the best AI tools that are currently trending and profitable.",
-      featured: true,
-      hot: true,
-      discount: "30% off",
-      tags: ["Freemium"],
-      metrics: {
-        monthlyVisits: "4k",
-        dr: 11,
-        as: 2
-      }
+  let websites: Website[] = allItems.map((item) => ({
+    id: item.id,
+    title: item.title,
+    website: item.website,
+    description: item.description || '',
+    icon: item.icon,
+    categories: item.categories,
+    subCategories: item.subCategories,
+    featured: item.featured,
+    hot: item.hot,
+    discount: item.discount,
+    tags: item.tags || [],
+    metrics: {
+        monthlyVisits: item.monthlyVisits,
+        dr: item.domainRating,
+        as: item.authorityScore
     },
-    {
-      id: 2,
-      title: "开发工具集",
-      icon: "/placeholder.svg",
-      categories: ["开发", "工具"],
-      subCategories: [{ categoryId: "tools", subCategoryId: "dev" }],
-      description: "为开发者提供的全套开发工具集合，包括代码编辑器、调试工具等。",
-      featured: false,
-      tags: ["开发者工具"],
-      metrics: {
-        monthlyVisits: "2k",
-        dr: 8,
-        as: 1
-      }
-    },
-    {
-      id: 3,
-      title: "设计资源库",
-      icon: "/placeholder.svg",
-      categories: ["设计", "资源"],
-      subCategories: [{ categoryId: "design", subCategoryId: "resources" }],
-      description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
-      featured: true,
-      discount: "20% off",
-      tags: ["设计资源"],
-      metrics: {
-        monthlyVisits: "3k",
-        dr: 9,
-        as: 2
-      }
-    },
-    {
-        id: 4,
-        title: "设计资源库",
-        icon: "/placeholder.svg",
-        categories: ["设计", "资源"],
-        subCategories: [{ categoryId: "design", subCategoryId: "resources" }],
-        description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
-        featured: true,
-        discount: "20% off",
-        tags: ["设计资源"],
-        metrics: {
-          monthlyVisits: "3k",
-          dr: 9,
-          as: 2
-        }
-      },
-      {
-        id: 5,
-        title: "AI Best Tools",
-        icon: "/placeholder.svg",
-        categories: ["AI", "Productivity"],
-        subCategories: [{ categoryId: "ai", subCategoryId: "ai-tools" }],
-        description: "AIBest.Tools is a curated list of the best AI tools that are currently trending and profitable.",
-        featured: true,
-        discount: "30% off",
-        tags: ["Freemium"],
-        metrics: {
-          monthlyVisits: "4k",
-          dr: 11,
-          as: 2
-        }
-      },
-      {
-        id: 6,
-        title: "开发工具集",
-        icon: "/placeholder.svg",
-        categories: ["AI", "Productivity"],
-        subCategories: [{ categoryId: "tools", subCategoryId: "dev" }],
-        description: "为开发者提供的全套开发工具集合，包括代码编辑器、调试工具等。",
-        featured: false,
-        tags: ["开发者工具"],
-        metrics: {
-          monthlyVisits: "2k",
-          dr: 8,
-          as: 1
-        }
-      },
-      {
-        id: 7,
-        title: "设计资源库",
-        icon: "/placeholder.svg",
-        categories: ["AI", "Productivity"],
-        subCategories: [{ categoryId: "learning", subCategoryId: "tutorials" }],
-        description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
-        featured: true,
-        discount: "20% off",
-        tags: ["设计资源"],
-        metrics: {
-          monthlyVisits: "3k",
-          dr: 9,
-          as: 2
-        }
-      },
-      {
-          id: 8,
-          title: "设计资源库",
-          icon: "/placeholder.svg",
-          categories: ["AI", "Productivity"],
-          subCategories: [{ categoryId: "ai", subCategoryId: "chatbots" }],
-          description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
-          featured: true,
-          discount: "20% off",
-          tags: ["设计资源"],
-          metrics: {
-            monthlyVisits: "3k",
-            dr: 9,
-            as: 2
-          }
-        }
-        ,
-        {
-            id:9,
-            title: "设计资源库",
-            icon: "/placeholder.svg",
-            categories: ["AI", "Productivity"],
-            subCategories: [{ categoryId: "ai", subCategoryId: "chatbots" }],
-            description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
-            featured: true,
-            discount: "20% off",
-            tags: ["设计资源"],
-            metrics: {
-              monthlyVisits: "3k",
-              dr: 9,
-              as: 2
-            }
-          },
-          {
-            id: 10,
-            title: "设计资源库",
-            icon: "/placeholder.svg",
-            categories: ["AI", "Productivity"],
-            subCategories: [{ categoryId: "ai", subCategoryId: "chatbots" }],
-            description: "海量设计资源，包括UI组件、图标、插画等设计素材。",
-            featured: true,
-            discount: "20% off",
-            tags: ["设计资源"],
-            metrics: {
-              monthlyVisits: "3k",
-              dr: 9,
-              as: 2
-            }
-          },
-          {
-            id: 11,
-            title: "设计资源库",
-            icon: "/placeholder.svg",
-            categories: ["AI", "Productivity"],
-            subCategories: [{ categoryId: "ai", subCategoryId: "chatbots" }],
-            description: "海量设计资源，包括UI组件、图标、插画等设计素。",
-            featured: true,
-            discount: "20% off",
-            tags: ["设计资源"],
-            metrics: {
-              monthlyVisits: "3k",
-              dr: 9,
-              as: 2
-            }
-          }
-  ];
+    slug: item.slug
+  })) as Website[];
 
-  // 根据分类筛选网站
+  console.log("websites", websites);
+
+  // Filter websites based on locale
+  const locale = useLocale();
+  websites = websites.filter((website) => website.slug.includes(`/${locale}/`));
+
+  // 修改筛选逻辑
   const filteredWebsites = categoryId && subCategoryId
     ? websites.filter(site => 
-        site.subCategories.some(
-          cat => cat.categoryId === categoryId && cat.subCategoryId === subCategoryId
-        )
+        site.categories.includes(categoryId) && 
+        site.subCategories.includes(subCategoryId)
       )
     : websites;
 
@@ -233,7 +82,7 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
     )} {...props}>
       {sortedWebsites.map((site) => (
         <Card 
-          key={site.id} 
+          key={`site-${site.id}`}
           className={cn(
             "flex flex-col justify-between relative p-4 shadow-sm hover:shadow-md transition-shadow duration-300 h-[200px]",
             site.hot 
@@ -253,7 +102,7 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
                 />
               </div>
               <div className="flex flex-col flex-1 gap-1 min-w-0">
-                <Link href="#" className="flex items-center gap-2 font-bold">
+                <Link href={site.website} target="_blank" className="flex items-center gap-2 font-bold">
                   <h3 className="w-fit flex-1 text-xs sm:text-sm font-semibold line-clamp-1 flex items-center gap-2 ml-1 hover:text-primary transition-all duration-200">
                     {site.title}
                     <ExternalLink className="hidden group-hover:block h-3 w-3 sm:h-4 sm:w-4" />
@@ -262,11 +111,12 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
                 <div className="flex flex-col gap-1 sm:gap-2">
                   <div className="flex flex-wrap gap-1">
                     {site.categories.map((category, index) => (
-                      <Link href={`/category/${category.toLowerCase()}`} key={index}>
-                        <span className="tracking-tight text-[10px] sm:text-xs bg-muted px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-sm border border-transparent hover:border-primary transition-all duration-200">
-                          {category}
+                        <span 
+                            key={`${site.id}-category-${index}`}
+                            className="tracking-tight text-[10px] sm:text-xs bg-muted px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-sm border border-transparent hover:border-primary transition-all duration-200"
+                        >
+                            {category}
                         </span>
-                      </Link>
                     ))}
                   </div>
                 </div>
@@ -285,7 +135,7 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
               </div>
             </div>
 
-            <Link href="#" className="group">
+            <Link href={site.slug.replace(`/${locale}/`, '/')} className="group">
               <p className="text-sm line-clamp-2 leading-relaxed hover:cursor-pointer hover:font-bold transition-all duration-200">
                 {site.description}
               </p>
@@ -296,10 +146,12 @@ export default function Cards({ className, categoryId, subCategoryId, ...props }
             <div className="flex-1">
               <div className="flex flex-wrap gap-1 sm:gap-2 items-center">
                 {site.tags.map((tag, index) => (
-                  <Link href={`/tag/${tag.toLowerCase()}`} key={index} className="flex items-center justify-center space-x-0.5 group">
-                    <Hash className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-muted-foreground" />
-                    <span className="text-xs sm:text-sm text-muted-foreground tracking-tight">{tag}</span>
-                  </Link>
+                    <span 
+                        key={`${site.id}-tag-${index}`}
+                        className="text-xs sm:text-sm text-muted-foreground tracking-tight"
+                    >
+                        {tag}
+                    </span>
                 ))}
               </div>
             </div>

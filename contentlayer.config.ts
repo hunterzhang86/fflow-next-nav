@@ -48,6 +48,84 @@ export const Doc = defineDocumentType(() => ({
   computedFields: defaultComputedFields,
 }));
 
+export const Item = defineDocumentType(() => ({
+  name: "Item",
+  filePathPattern: `items/**/*.md`,
+  contentType: "markdown",
+  fields: {
+    id: {
+      type: "number",
+      default: 1,
+    },
+    title: {
+      type: "string",
+      required: true,
+    },
+    icon: {
+      type: "string",
+      default: "/placeholder.svg",
+    },
+    description: {
+      type: "string",
+    },
+    website: {
+      type: "string",
+      required: true,
+    },
+    email: {
+      type: "string",
+    },
+    twitter: {
+      type: "string",
+    },
+    published: {
+      type: "date",
+    },
+    featured: {
+      type: "boolean",
+      default: false,
+    },
+    monthlyVisits: {
+      type: "number",
+      default: 1000,
+    },
+    domainRating: {
+      type: "number",
+      default: 80,
+    },
+    authorityScore: {
+      type: "number",
+      default: 80,
+    },
+    categories: {
+      type: "list",
+      of: {
+        type: "string",
+      },
+      required: true,
+    },
+    subCategories: {
+      type: "list",
+      of: {
+        type: "string",
+      },
+      required: true,
+    },
+    discount: {
+      type: "number",
+    },
+    hot: {
+      type: "boolean",
+      default: false,
+    },
+    tags: {
+      type: "list",
+      of: { type: "string" },
+    },
+  },
+  computedFields: defaultComputedFields,
+}));
+
 export const Guide = defineDocumentType(() => ({
   name: "Guide",
   filePathPattern: `guides/**/*.md`,
@@ -59,6 +137,7 @@ export const Guide = defineDocumentType(() => ({
     },
     description: {
       type: "string",
+      required: true,
     },
     date: {
       type: "date",
@@ -142,7 +221,7 @@ export const Page = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "./content",
-  documentTypes: [Page, Doc, Guide, Post],
+  documentTypes: [Page, Doc, Guide, Post, Item],
   markdown: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [

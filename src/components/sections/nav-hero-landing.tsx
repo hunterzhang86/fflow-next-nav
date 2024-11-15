@@ -1,17 +1,14 @@
 import { useTranslations } from "next-intl";
 
-import { env } from "@/env.mjs";
-import { cn, nFormatter } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 import Link from "@/components/link/link";
-import { Icons } from "@/components/shared/icons";
-import { siteConfig } from "@/config/site";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface NavHeroLandingProps {
   locale: string;
 }
 
-export default async function NavHeroLanding({ locale }: NavHeroLandingProps) {
+export default function NavHeroLanding({ locale }: NavHeroLandingProps) {
   const t = useTranslations("HeroLanding");
 
   return (

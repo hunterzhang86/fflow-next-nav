@@ -1,4 +1,4 @@
-import { allDocs } from "contentlayer/generated";
+import { allItems } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 
 import { Mdx } from "@/components/content/mdx-components";
@@ -6,11 +6,12 @@ import { DocsPager } from "@/components/docs/pager";
 import MaxWidthWrapper from "@/components/shared/max-width-wrapper";
 import { getTableOfContents } from "@/lib/toc";
 
-import { Breadcrumb } from "@/components/shared/breadcrumb";
 import { constructMetadata, getBlurDataURL } from "@/lib/utils";
 import "@/styles/mdx.css";
 import { BarChartIcon, ExternalLinkIcon, GlobeIcon, InfoCircledIcon, StackIcon } from "@radix-ui/react-icons";
 import { Metadata } from "next";
+import { TwitterIcon } from "lucide-react";
+import { ItemsPager } from "@/components/item/pager";
 
 interface DocPageProps {
   params: {
@@ -22,7 +23,7 @@ async function getDocFromParams(params) {
   const slug = params.slug
     ? params.locale + "/" + params.slug.join("/")
     : params.locale;
-  const doc = allDocs.find((doc) => doc.slugAsParams === slug);
+  const doc = allItems.find((doc) => doc.slugAsParams === slug);
   if (!doc) return null;
   return doc;
 }
@@ -39,21 +40,20 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<DocPageProps["params"][]> {
-  return allDocs.map((doc) => ({
+  return allItems.map((doc) => ({
     slug: doc.slugAsParams.split("/"),
   }));
 }
 
 export default async function DocPage({ params }: DocPageProps) {
-  const doc = await getDocFromParams(params);
+  const item = await getDocFromParams(params);
 
-  if (!doc) {
+  if (!item) {
     notFound();
   }
 
-  const toc = await getTableOfContents(doc.body.raw);
   const images = await Promise.all(
-    doc.images.map(async (src: string) => ({
+    item.images.map(async (src: string) => ({
       src,
       blurDataURL: await getBlurDataURL(src),
     }))
@@ -70,11 +70,11 @@ export default async function DocPage({ params }: DocPageProps) {
                 <GlobeIcon className="w-6 h-6 text-primary" />
               </div>
               <div className="flex-1">
-                <h1 className="text-3xl font-bold tracking-tight">{doc.title}</h1>
+                <h1 className="text-3xl font-bold tracking-tight">{item.title}</h1>
               </div>
-              {doc.website && (
+              {item.website && (
                 <a
-                  href={doc.website}
+                  href={item.website}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
@@ -84,8 +84,8 @@ export default async function DocPage({ params }: DocPageProps) {
                 </a>
               )}
             </div>
-            {doc.description && (
-              <p className="text-lg text-muted-foreground">{doc.description}</p>
+            {item.description && (
+              <p className="text-lg text-muted-foreground">{item.description}</p>
             )}
           </div>
 
@@ -95,11 +95,11 @@ export default async function DocPage({ params }: DocPageProps) {
             <div className="lg:col-span-7 flex flex-col">
               <div className="border shadow-md rounded-lg p-6 mr-0 lg:mr-8">
                 <article className="prose dark:prose-invert max-w-none">
-                  <Mdx code={doc.body.raw} images={images} />
+                  <Mdx code={item.body.raw} images={images} />
                 </article>
               </div>
               <div className="flex items-center justify-start mt-16">
-                <DocsPager doc={doc} />
+                <ItemsPager item={item} />
               </div>
             </div>
 
@@ -115,22 +115,22 @@ export default async function DocPage({ params }: DocPageProps) {
                   <ul className="space-y-4 text-sm">
                     <li className="flex justify-between">
                       <span className="text-muted-foreground">Website</span>
-                      <a href={doc.website} target="_blank" className="font-medium link-underline">
-                        {doc.website}
+                      <a href={item.website} target="_blank" className="font-medium link-underline">
+                        {item.website}
                       </a>
                     </li>
-                    {doc.email && (
+                    {item.email && (
                       <li className="flex justify-between">
                         <span className="text-muted-foreground">Email</span>
-                        <span className="font-medium">{doc.email}</span>
+                        <span className="font-medium">{item.email}</span>
                       </li>
                     )}
                     {/* 社交媒体链接 */}
                     <li className="flex justify-between">
                       <span className="text-muted-foreground">Social Media</span>
                       <div className="flex items-center gap-2">
-                        {doc.twitter && (
-                          <a href={doc.twitter} target="_blank" className="hover:scale-110 transition-transform">
+                        {item.twitter && (
+                          <a href={item.twitter} target="_blank" className="hover:scale-110 transition-transform">
                             <TwitterIcon className="w-4 h-4" />
                           </a>
                         )}
@@ -139,7 +139,7 @@ export default async function DocPage({ params }: DocPageProps) {
                     </li>
                     <li className="flex justify-between">
                       <span className="text-muted-foreground">Published date</span>
-                      <span className="font-medium">{doc.publishDate}</span>
+                      <span className="font-medium">{item.published}</span>
                     </li>
                   </ul>
                 </div>
@@ -153,15 +153,15 @@ export default async function DocPage({ params }: DocPageProps) {
                   <ul className="space-y-4 text-sm">
                     <li className="flex justify-between">
                       <span className="text-muted-foreground">Monthly Visitors</span>
-                      <span className="font-medium">{doc.monthlyVisits}</span>
+                      <span className="font-medium">{item.monthlyVisits}</span>
                     </li>
                     <li className="flex justify-between">
                       <span className="text-muted-foreground">Domain Rating</span>
-                      <span className="font-medium">{doc.domainRating}</span>
+                      <span className="font-medium">{item.domainRating}</span>
                     </li>
                     <li className="flex justify-between">
                       <span className="text-muted-foreground">Authority Score</span>
-                      <span className="font-medium">{doc.authorityScore}</span>
+                      <span className="font-medium">{item.authorityScore}</span>
                     </li>
                   </ul>
                 </div>
@@ -173,12 +173,12 @@ export default async function DocPage({ params }: DocPageProps) {
                     <h2 className="text-lg font-semibold">Categories & Tags</h2>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {doc.categories?.map((category) => (
+                    {item.categories?.map((category) => (
                       <span key={category} className="text-sm px-2 py-1 bg-primary/10 rounded-md">
                         {category}
                       </span>
                     ))}
-                    {doc.tags?.map((tag) => (
+                    {item.tags?.map((tag) => (
                       <span key={tag} className="text-sm px-2 py-1 bg-secondary/10 rounded-md">
                         #{tag}
                       </span>

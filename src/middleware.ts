@@ -7,7 +7,7 @@ const intlMiddleware = createMiddleware({
     locales: ['en', 'zh'],
 
     // Used when no locale matches
-    defaultLocale: 'en'
+    defaultLocale: 'zh'
 });
 
 export default async function middlewareHandler(req: NextRequest) {
@@ -22,13 +22,13 @@ export default async function middlewareHandler(req: NextRequest) {
 
     // 如果路径是根路径，则重定向到默认语言
     if (pathname === '/') {
-        return NextResponse.redirect(new URL('/en', req.url));
+        return NextResponse.redirect(new URL('/zh', req.url));
     }
 
     // 如果路径不包含语言前缀，则重定向到默认语言路径
     const isLocalePath = /^\/(en|zh)(\/|$)/.test(pathname);
     if (!isLocalePath) {
-        return NextResponse.redirect(new URL(`/en${pathname}`, req.url));
+        return NextResponse.redirect(new URL(`/zh${pathname}`, req.url));
     }
 
     // 调用 next-intl 的中间件

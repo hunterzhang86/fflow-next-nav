@@ -30,12 +30,12 @@ export default function Menu({ className, onSubCategorySelect, ...props }: MenuP
 
   const categories = [
     { 
-      id: "tools", 
-      label: "工具类",
+      id: "Finance", 
+      label: "融资",
       icon: <Wrench className="h-4 w-4" />,
       subCategories: [
-        { id: "dev", label: "开发工具", icon: <Code className="h-4 w-4" /> },
-        { id: "design", label: "设计工具", icon: <Palette className="h-4 w-4" /> }
+        { id: "Supply Chain Finance", label: "供应链融资", icon: <Code className="h-4 w-4" /> },
+        { id: "Trade Finance", label: "贸易融资", icon: <Palette className="h-4 w-4" /> }
       ]
     },
     { 
